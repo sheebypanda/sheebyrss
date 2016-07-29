@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   devise_for :users
-  root 'welcome#index'
+  root 'welcome#home'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
