@@ -8,9 +8,10 @@ class SourcesController < ApplicationController
   end
 
   def create
-    current_user.source.create(source_url)
+    current_user.source.create(source_url).save
+
   end
-  
+
   def destroy
   end
 
