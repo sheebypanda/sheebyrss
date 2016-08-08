@@ -1,0 +1,8 @@
+<form class="form-inline">
+  <div class="form-group">
+    <%= simple_form_for @source  do |f| %>
+      <%= f.input :url , label: false, placeholder: "http://sheebypanda.com" %>
+      <%= f.button :submit %>
+    <% end %>
+  </div>
+</form>
