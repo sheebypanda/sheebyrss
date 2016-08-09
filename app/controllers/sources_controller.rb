@@ -8,7 +8,7 @@ class SourcesController < ApplicationController
   end
 
   def create
-    @source = current_user.sources.new(source_url)
+    @source = current_user.sources.new(source_params)
     if @source.save
       flash[:notice] = @source.url + " added"
       redirect_to sources_path
@@ -18,15 +18,19 @@ class SourcesController < ApplicationController
   end
 
   def destroy
-    @source.destroy
-    flash[:notice] = "Source successfully deleted"
+    source = current_user.sources.find(params[:id])
+    if source.destroy
+      flash[:notice] = "Source successfully deleted"
+    else
+      flash[:alert] = "Error : Source not deleted"
+    end
     redirect_to sources_path
   end
 
   private
 
-  def source_url
-    params.require(:source).permit(:url)
+  def source_params
+    params.require(:source).permit(:url, :source_id)
   end
 
 end
