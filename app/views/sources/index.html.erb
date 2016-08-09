@@ -1,4 +1,6 @@
 <% @sources.each do |source| %>
-<h4><%= source.url %></h4>
-
+  <h4><%= source.url %> <%= link_to "delete", source_path(source),
+        method: :delete,
+        data: { confirm: "Are you sure?" },
+        class: "btn btn-danger" %></h4>
 <% end %>
