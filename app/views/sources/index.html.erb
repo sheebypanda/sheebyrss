@@ -1,6 +1,14 @@
-<% @sources.each do |source| %>
-  <h4><%= source.url %> <%= link_to "delete", source_path(source),
-        method: :delete,
-        data: { confirm: "Are you sure?" },
-        class: "btn btn-danger" %></h4>
-<% end %>
+<div class="card-columns">
+  <% @sources.each do |source| %>
+    <div class="card">
+      <div class="card-block">
+        <h5 class="card-title"> <%= source.url %></h4>
+      </div>
+      <% source.articles.each do |article| %>
+          <a href="<%= article.url %>" class="list-group-item">
+            <%= article.title %>
+          </a>
+      <% end %>
+    </div>
+  <% end %>
+</div>

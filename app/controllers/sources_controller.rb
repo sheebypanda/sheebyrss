@@ -1,6 +1,22 @@
+require 'rss'
+
 class SourcesController < ApplicationController
   def index
     @sources = current_user.sources.all
+    @sources.each do |source|
+      source.articles.destroy_all
+      rss = RSS::Parser.parse(source.url, false)
+      case rss.feed_type
+        when 'rss'
+          rss.items.each do |item|
+            source.articles.create(title: item.title, url:item.link)
+          end
+        when 'atom'
+          rss.items.each do |item|
+            source.articles.create(title: item.title.content, url: item.url.content )
+          end
+      end
+    end
   end
   def new
     @source = current_user.sources.new
@@ -30,5 +46,17 @@ class SourcesController < ApplicationController
     params.require(:source).permit(:url, :source_id)
   end
   def get_rss(url)
+    rss = RSS::Parser.parse(url, false)
+    case rss.feed_type
+      when 'rss'
+        @articlestitles = []
+        rss.items.each do |item|
+          @articlestitles << item.title
+        end
+      when 'atom'
+        rss.items.each do |item|
+          @articlestitles << item.title.content
+        end
+    end
   end
 end
