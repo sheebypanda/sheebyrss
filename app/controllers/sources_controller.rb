@@ -1,34 +1,14 @@
-require 'rss'
-
 class SourcesController < ApplicationController
   def index
     @sources = current_user.sources.all
     @source = current_user.sources.new
-    end
   end
 
   def new
   end
 
   def update
-    @sources = current_user.sources.all
-    @sources.each do |source|
-    source.articles.destroy_all
-    rss = RSS::Parser.parse(source.url, false)
-    if rss
-      case rss.feed_type
-        when 'rss'
-          rss.items.each do |item|
-            source.articles.create(title: item.title, url:item.link)
-          end
-        when 'atom'
-          rss.items.each do |item|
-            source.articles.create(title: item.title.content, url: item.url.content )
-          end
-      end
-    else
-      flash[:alert] = "Error : #{source.url} can not be loaded"
-    end
+    ParseRss.new(self).update
   end
 
   def create
@@ -57,19 +37,5 @@ class SourcesController < ApplicationController
 
   def source_url
     params.require(:source).permit(:url, :source_id)
-  end
-  def get_rss(url)
-    rss = RSS::Parser.parse(url, false)
-    case rss.feed_type
-      when 'rss'
-        @articlestitles = []
-        rss.items.each do |item|
-          @articlestitles << item.title
-        end
-      when 'atom'
-        rss.items.each do |item|
-          @articlestitles << item.title.content
-        end
-    end
   end
 end

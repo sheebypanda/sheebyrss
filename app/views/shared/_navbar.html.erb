@@ -9,7 +9,7 @@
         <% if user_signed_in? %>
           <%= simple_form_for @source do |f| %>
             <%= f.input :url , label: false, placeholder: "http://url.com/feed" %>
-            <%= f.button :button, "Add new feed", class: "btn-info-outline" %>
+            <%= f.button :button, "Add new feed", class: "btn-outline-info" %>
           <% end %>
         <% end %>
       </div>
