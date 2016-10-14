@@ -1,6 +1,6 @@
 <div class="card-columns">
   <% @sources.each do |source| %>
-    <div class="card">
+    <div class="card card-inverse" style="background-color: #333; border-color: #333;">
       <div class="card-block">
         <h5 class="card-title"> <%= source.url %></h4>
       </div>
@@ -9,6 +9,10 @@
             <%= article.title %>
           </a>
       <% end %>
+      <div class="card-block">
+        <a href="#" class="btn btn-info-outline">Update</a>
+        <%= link_to "Delete", source_path(source) , method: :delete , class: "btn btn-danger-outline" %>
+      </div>
     </div>
   <% end %>
 </div>

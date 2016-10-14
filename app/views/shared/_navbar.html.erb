@@ -1,18 +1,18 @@
-<nav class="navbar navbar-dark bg-inverse">
+<nav class="navbar navbar-dark bg-inverse navbar-fixed-top">
   <button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar2" aria-controls="exCollapsingNavbar2" aria-expanded="false" aria-label="Toggle navigation">
     &#9776;
   </button>
   <div class="collapse navbar-toggleable-xs" id="exCollapsingNavbar2">
     <a class="navbar-brand" href="#">Sheeby RSS</a>
     <ul class="nav navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <% if user_signed_in? %>
-        <li class="nav-item">
-          <%= link_to "Add content" , new_source_path, :class => 'nav-link' %>
-        </li>
-      <% end %>
+      <div class="pull-xs-left form-inline">
+        <% if user_signed_in? %>
+          <%= simple_form_for @source do |f| %>
+            <%= f.input :url , label: false, placeholder: "http://url.com/feed" %>
+            <%= f.button :button, "Add new feed", class: "btn-info-outline" %>
+          <% end %>
+        <% end %>
+      </div>
     </ul>
     <div class="pull-xs-right">
       <ul class="nav navbar-nav">
