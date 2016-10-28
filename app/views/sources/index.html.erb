@@ -1,17 +1,19 @@
-<% @sources.each do |source| %>
-  <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-    <div class="card card-inverse" style="background-color: #333; border-color: #333;">
-      <div class="card-block">
-        <h5 class="card-title">
-          <%= source.url %>
-          <%= link_to "Delete" , source_path(source) , method: :delete , class: "btn btn-outline-danger btn-sm" %>
-        </h5>
+<div class="content">
+  <% @sources.each do |source| %>
+    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+      <div class="card card-inverse" style="background-color: #333; border-color: #333;">
+        <div class="card-block">
+          <h5 class="card-title">
+            <%= source.url %>
+            <%= link_to "Delete" , source_path(source) , method: :delete , class: "btn btn-outline-danger btn-sm" %>
+          </h5>
+        </div>
+        <% source.articles.each do |article| %>
+            <a href="<%= article.url %>" class="list-group-item">
+              <%= article.title %>
+            </a>
+        <% end %>
       </div>
-      <% source.articles.each do |article| %>
-          <a href="<%= article.url %>" class="list-group-item">
-            <%= article.title %>
-          </a>
-      <% end %>
     </div>
-  </div>
-<% end %>
+  <% end %>
+</div>

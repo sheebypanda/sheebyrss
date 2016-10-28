@@ -1,17 +1,19 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>SheebyRSS</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body class="container-fluid">
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>SheebyRSS</title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
 
-  <%= render 'shared/navbar' %>
-  <%= render 'shared/flash' %>
+  <body class="container-fluid">
+    <%= render 'shared/navbar' %>
+    <%= render 'shared/flash' %>
 
-  <%= yield %>
-
-</body>
+    <%= yield %>
+  </body>
 </html>

@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:300|Oswald:300');
+
+body {
+  font-family: 'Lato', sans-serif;
+  font-size:1em;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Oswald', sans-serif;
+}
+
+div.content {
+  margin-top: 60px;
+}
