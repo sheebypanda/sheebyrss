@@ -8,7 +8,7 @@ class SourcesController < ApplicationController
   end
 
   def update
-    ParseRss.new(self).update
+    ParseRss.new(self).run
   end
 
   def create
@@ -16,6 +16,7 @@ class SourcesController < ApplicationController
     rss = RSS::Parser.parse(@source.url, false)
     if rss and @source.save
       flash[:notice] = @source.url + " added"
+      update
       redirect_to sources_path
     else
       flash[:alert] = "Error : #{@source.url} is not a valid RSS feed"

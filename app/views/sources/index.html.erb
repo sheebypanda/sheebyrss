@@ -1,11 +1,13 @@
-<div class="content">
+<div class="card-columns">
   <% @sources.each do |source| %>
-    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
       <div class="card card-inverse" style="background-color: #333; border-color: #333;">
         <div class="card-block">
           <h5 class="card-title">
             <%= source.url %>
-            <%= link_to "Delete" , source_path(source) , method: :delete , class: "btn btn-outline-danger btn-sm" %>
+            <%= link_to "Delete" , source_path(source) ,
+              method: :delete,
+              data: { confirm: "Are you sure ?" },
+              class: "btn btn-outline-danger btn-sm" %>
           </h5>
         </div>
         <% source.articles.each do |article| %>
@@ -14,6 +16,5 @@
             </a>
         <% end %>
       </div>
-    </div>
   <% end %>
 </div>
