@@ -3,10 +3,10 @@ class SourcesController < ApplicationController
     @sources = current_user.sources.all
     @source = current_user.sources.new
   end
-  def update_all
+  def update_all(current_user)
     ParseRss.run(current_user)
   end
-  def update(source_id)
+  def update(current_user, source_id)
     ParseRss.run(current_user, source_id)
   end
   def create
