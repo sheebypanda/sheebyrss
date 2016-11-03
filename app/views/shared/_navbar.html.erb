@@ -5,18 +5,20 @@
   <div class="collapse navbar-toggleable-xs" id="exCollapsingNavbar2">
     <a class="navbar-brand" href="/">Sheeby RSS</a>
     <ul class="nav navbar-nav">
+      <% if user_signed_in? %>
       <div class="float-xs-left form-inline">
-        <% if user_signed_in? %>
           <%= simple_form_for @source do |f| %>
             <%= f.input :url , label: false, placeholder: "http://url.com/feed" %>
             <%= f.button :button, icon('plus') + " Add new feed", class: "btn-outline-info" %>
           <% end %>
-          <%= link_to "" , edit_user_registration_path, :class => 'btn-outline-warning' %>
-        <% end %>
       </div>
+      <% end %>
     </ul>
     <ul class="float-lg-right nav navbar-nav">
       <% if user_signed_in? %>
+        <li class="nav-item">
+          <%= link_to icon("refresh")+" Update All" , "/" , :class => 'btn-outline-warning btn' %>
+        </li>
         <li class="nav-item">
           <%= link_to current_user.email , edit_user_registration_path, :class => 'nav-link active' %>
         </li>
