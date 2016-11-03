@@ -3,35 +3,28 @@ class SourcesController < ApplicationController
     @sources = current_user.sources.all
     @source = current_user.sources.new
   end
-
-  def new
-  end
-
   def update
     ParseRss.new(self).run
   end
-
   def create
     @source = current_user.sources.new(source_url)
     rss = RSS::Parser.parse(@source.url, false)
     if rss and @source.save
       flash[:notice] = @source.url + " added"
-      update
       redirect_to sources_path
     else
       flash[:alert] = "Error : #{@source.url} is not a valid RSS feed"
       redirect_to sources_path
     end
   end
-
   def destroy
-    @source = current_user.sources.find(params[:id])
+    get_source
     if @source.destroy
       flash[:notice] = "#{@source.url} successfully deleted"
     else
       flash[:alert] = "Error : #{@source.url} not deleted"
     end
-    redirect_to sources_path
+    redirect_to root_path
   end
 
   private
@@ -39,4 +32,8 @@ class SourcesController < ApplicationController
   def source_url
     params.require(:source).permit(:url, :source_id)
   end
+  def get_source
+    @source = current_user.sources.find(params[:id])
+  end
+
 end

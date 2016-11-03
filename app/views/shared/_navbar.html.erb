@@ -1,37 +1,36 @@
-<nav class="navbar navbar-dark bg-inverse navbar-fixed-top">
+<nav class="navbar navbar-dark bg-inverse navbar-full">
   <button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar2" aria-controls="exCollapsingNavbar2" aria-expanded="false" aria-label="Toggle navigation">
     &#9776;
   </button>
   <div class="collapse navbar-toggleable-xs" id="exCollapsingNavbar2">
-    <a class="navbar-brand" href="#">Sheeby RSS</a>
+    <a class="navbar-brand" href="/">Sheeby RSS</a>
     <ul class="nav navbar-nav">
-      <div class="pull-xs-left form-inline">
+      <div class="float-xs-left form-inline">
         <% if user_signed_in? %>
           <%= simple_form_for @source do |f| %>
             <%= f.input :url , label: false, placeholder: "http://url.com/feed" %>
-            <%= f.button :button, "Add new feed", class: "btn-outline-info" %>
+            <%= f.button :button, icon('plus') + " Add new feed", class: "btn-outline-info" %>
           <% end %>
+          <%= link_to "" , edit_user_registration_path, :class => 'btn-outline-warning' %>
         <% end %>
       </div>
     </ul>
-    <div class="pull-xs-right">
-      <ul class="nav navbar-nav">
-        <% if user_signed_in? %>
-          <li class="nav-item">
-            <%= link_to current_user.email , edit_user_registration_path, :class => 'nav-link active' %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'nav-link'  %>
-          </li>
-        <% else %>
+    <ul class="float-lg-right nav navbar-nav">
+      <% if user_signed_in? %>
         <li class="nav-item">
-          <%= link_to "Sign up", new_user_registration_path, :class => 'nav-link'  %>
+          <%= link_to current_user.email , edit_user_registration_path, :class => 'nav-link active' %>
         </li>
         <li class="nav-item">
-          <%= link_to "Login", new_user_session_path, :class => 'nav-link'  %>
+          <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'nav-link'  %>
         </li>
-        <% end %>
-      </ul>
-    </div>
+      <% else %>
+      <li class="nav-item">
+        <%= link_to "Sign up", new_user_registration_path, :class => 'nav-link'  %>
+      </li>
+      <li class="nav-item">
+        <%= link_to "Login", new_user_session_path, :class => 'nav-link'  %>
+      </li>
+      <% end %>
+    </ul>
   </div>
 </nav>
