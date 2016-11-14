@@ -1,6 +1,6 @@
 <div id="accordion" role="tablist" aria-multiselectable="true">
   <% @sources.each do |source| %>
-    <div class="card card-inverse" style="background-color: #333; border-color: #333;">
+    <div class="col-lg-4 col-smd-12 card card-inverse mx-1" style="background-color: #333; border-color: #333;">
       <div role="tab" id="heading<%= source.id %>">
         <h5 class="card-title">
           <a data-toggle="collapse" data-parent="#accordion" href="#collapse<%= source.id %>" aria-expanded="false" aria-controls="collapse<%= source.id %>">
