@@ -1,26 +1,20 @@
-<div id="accordion" role="tablist" aria-multiselectable="true">
+<div class="card-columns">
   <% @sources.each do |source| %>
-    <div class="col-lg-4 col-smd-12 card card-inverse mx-1" style="background-color: #333; border-color: #333;">
-      <div role="tab" id="heading<%= source.id %>">
-        <h5 class="card-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapse<%= source.id %>" aria-expanded="false" aria-controls="collapse<%= source.id %>">
-            <%= source.url %>
+  <% source.articles.each do |article| %>
+
+      <div class="card ">
+        <div class="card-block">
+          <a href="<%= article.url %>" class="card-title">
+            <%= article.title %>
           </a>
-          <%= link_to icon("refresh") , source ,
-          class: "btn btn-outline-warning btn-sm" %>
-          <%= link_to icon("trash") , source ,
-            method: :delete,
-            data: { confirm: "Are you sure ?" },
-            class: "btn btn-outline-danger btn-sm" %>
-        </h5>
+          <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+          <%= link_to "Delete source" , source ,
+          method: :delete,
+          data: { confirm: "Are you sure ?" },
+          class: "btn btn-outline-danger btn-sm" %>
+        </div>
       </div>
-      <div id="collapse<%= source.id %>" class="collapse" role="tabpanel" aria-labelledby="heading<%= source.id %>">
-        <% source.articles.each do |article| %>
-            <a href="<%= article.url %>" class="list-group-item">
-              <%= article.title %>
-            </a>
-        <% end %>
-      </div>
-    </div>
+    <% end %>
   <% end %>
 </div>
