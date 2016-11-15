@@ -1,6 +1,6 @@
 class SourcesController < ApplicationController
   def index
-    @sources = current_user.sources.all
+    @articles = current_user.articles.order(pub_date: :DESC)
     @source = current_user.sources.new
   end
   def update(current_user)
