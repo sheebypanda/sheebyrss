@@ -11,16 +11,12 @@ class SourcesController < ApplicationController
     @source = current_user.sources.new(source_url)
     if current_user.sources.find_by(source_url)
       flash[:alert] = "Error :  #{@source.url} already added"
-      redirect_to sources_path
+    elsif RSS::Parser.parse(@source.url, do_validate=true, ignore_unknown_element=true) and @source.save
+      update
+      flash[:notice] = @source.url + " added"
     else
-      if RSS::Parser.parse(@source.url, false) and @source.save
-        update
-        flash[:notice] = @source.url + " added"
-        redirect_to sources_path
-      else
-        flash[:alert] = "Error : #{@source.url} is not a valid RSS feed"
-        redirect_to sources_path
-      end
+      flash[:alert] = "Error : #{@source.url} is not a valid RSS feed"
+      redirect_to sources_path
     end
   end
   def destroy
