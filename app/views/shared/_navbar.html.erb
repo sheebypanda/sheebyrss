@@ -17,7 +17,7 @@
     <ul class="float-lg-right nav navbar-nav">
       <% if user_signed_in? %>
         <li class="nav-item">
-          <%= link_to icon("refresh")+" Update All" , "/" , :class => 'btn-outline-warning btn' %>
+          <%= link_to icon("refresh")+" Update"  , "/update", :class => 'btn-outline-warning btn'  %>
         </li>
         <li class="nav-item">
           <%= link_to current_user.email , edit_user_registration_path, :class => 'nav-link active' %>

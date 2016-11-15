@@ -3,8 +3,9 @@ class SourcesController < ApplicationController
     @articles = current_user.articles.order(pub_date: :DESC)
     @source = current_user.sources.new
   end
-  def update(current_user)
+  def update
     ParseRss.run(current_user)
+    redirect_to sources_path
   end
   def create
     @source = current_user.sources.new(source_url)
@@ -12,9 +13,8 @@ class SourcesController < ApplicationController
       flash[:alert] = "Error :  #{@source.url} already added"
       redirect_to sources_path
     else
-      rss = RSS::Parser.parse(@source.url, false)
-      if rss and @source.save
-        update(current_user)
+      if RSS::Parser.parse(@source.url, false) and @source.save
+        update
         flash[:notice] = @source.url + " added"
         redirect_to sources_path
       else
