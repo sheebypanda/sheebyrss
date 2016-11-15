@@ -23,11 +23,20 @@ class ParseRss < ServiceBase
         case rss.feed_type
           when 'rss'
             rss.items.each do |item|
-              source.articles.create(title: item.title, url:item.link, excerpt: Sanitize.fragment(item.description) )
+              source.articles.create(
+                title: item.title,
+                url:item.link,
+                excerpt: Sanitize.fragment(item.description),
+                pub_date: item.pubDate)
             end
           when 'atom'
             rss.items.each do |item|
-              source.articles.create(title: item.title.content, url: item.url.content, excerpt: Sanitize.fragment(item.description.content) )
+              source.articles.create(
+              title: item.title.content,
+              url: item.url.content,
+              excerpt: Sanitize.fragment(item.description.content),
+              pub_date: item.pubDate.content
+               )
             end
         end
       else
