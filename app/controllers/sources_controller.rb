@@ -3,22 +3,24 @@ class SourcesController < ApplicationController
     @sources = current_user.sources.all
     @source = current_user.sources.new
   end
-  def update_all(current_user)
+  def update(current_user)
     ParseRss.run(current_user)
-  end
-  def update(current_user, source_id)
-    ParseRss.run(current_user, source_id)
   end
   def create
     @source = current_user.sources.new(source_url)
-    rss = RSS::Parser.parse(@source.url, false)
-    if rss and @source.save
-      update(current_user, @source.id)
-      flash[:notice] = @source.url + " added"
+    if current_user.sources.find_by(url: 'source_url')
+      flash[:alerte] = "Error : Source already added"
       redirect_to sources_path
     else
-      flash[:alert] = "Error : #{@source.url} is not a valid RSS feed"
-      redirect_to sources_path
+      rss = RSS::Parser.parse(@source.url, false)
+      if rss and @source.save
+        update(current_user)
+        flash[:notice] = @source.url + " added"
+        redirect_to sources_path
+      else
+        flash[:alert] = "Error : #{@source.url} is not a valid RSS feed"
+        redirect_to sources_path
+      end
     end
   end
   def destroy

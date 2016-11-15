@@ -10,10 +10,11 @@
     <%= csrf_meta_tags %>
   </head>
 
-  <body class="container-fluid">
+  <body>
     <%= render 'shared/navbar' %>
-    <%= render 'shared/flash' %>
-
-    <%= yield %>
+    <div class="container-fluid">
+      <%= render 'shared/flash' %>
+      <%= yield %>
+    </div>
   </body>
 </html>
