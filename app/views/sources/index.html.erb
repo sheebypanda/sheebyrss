@@ -1,5 +1,7 @@
 <div class="card-columns">
   <% @sources.each do |source| %>
+  <% source.url.slice!("http://") %>
+  <% source.url.slice!("/feed/") %>
   <% source.articles.each do |article| %>
 
       <div class="card ">
@@ -7,8 +9,9 @@
           <a href="<%= article.url %>" class="card-title">
             <%= article.title %>
           </a>
-          <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+          <p class="card-text"><%= article.excerpt %></p>
           <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+          <p class="card-text"><small class="text-muted"><%= source.url %></small></p>
           <%= link_to "Delete source" , source ,
           method: :delete,
           data: { confirm: "Are you sure ?" },

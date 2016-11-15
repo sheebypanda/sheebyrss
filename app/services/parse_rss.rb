@@ -23,11 +23,11 @@ class ParseRss < ServiceBase
         case rss.feed_type
           when 'rss'
             rss.items.each do |item|
-              source.articles.create(title: item.title, url:item.link)
+              source.articles.create(title: item.title, url:item.link, excerpt: item.description)
             end
           when 'atom'
             rss.items.each do |item|
-              source.articles.create(title: item.title.content, url: item.url.content )
+              source.articles.create(title: item.title.content, url: item.url.content, excerpt: item.description.content )
             end
         end
       else

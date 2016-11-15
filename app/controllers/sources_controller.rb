@@ -8,8 +8,8 @@ class SourcesController < ApplicationController
   end
   def create
     @source = current_user.sources.new(source_url)
-    if current_user.sources.find_by(url: 'source_url')
-      flash[:alerte] = "Error : Source already added"
+    if current_user.sources.find_by(source_url)
+      flash[:alert] = "Error :  #{@source.url} already added"
       redirect_to sources_path
     else
       rss = RSS::Parser.parse(@source.url, false)
