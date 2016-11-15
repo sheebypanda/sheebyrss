@@ -16,6 +16,7 @@ gem 'bootstrap', '~> 4.0.0.alpha5'
 gem 'font-awesome-sass', '~> 4.7.0'
 gem 'simple_form'
 gem 'devise'
+gem 'sanitize'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-tether', '>= 1.1.0'
