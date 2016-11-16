@@ -9,7 +9,6 @@ class ParseRss < ServiceBase
 
   def run
     get_rss
-    end
   end
 
   private
@@ -44,3 +43,5 @@ class ParseRss < ServiceBase
       end
     end
   end
+
+end
