@@ -1,6 +1,6 @@
 class SourcesController < ApplicationController
   def index
-    @articles = UrlDisplay.run(current_user, current_user.articles.order(pub_date: :DESC) )
+    @articles = current_user.articles.order(pub_date: :DESC)
     @source = current_user.sources.new
   end
   def update
@@ -14,8 +14,10 @@ class SourcesController < ApplicationController
     else
       begin
         RSS::Parser.parse(@source.url, do_validate=true, ignore_unknown_element=true)
+        @source.name = @source.url
+        get_source_name(@source.name)
         @source.save
-        flash[:notice] = @source.url + " added"
+        flash[:notice] = @source.name + " added"
       rescue
         flash[:alert] = "Error : #{@source.url} is not a valid RSS feed"
       end
@@ -39,6 +41,12 @@ class SourcesController < ApplicationController
   end
   def get_source
     @source = current_user.sources.find(params[:id])
+  end
+  def get_source_name(url)
+    url.slice!("http://")
+    url.slice!("/feed/")
+    url.slice!("/feed")
+    url.slice!("www.")
   end
 
 end
