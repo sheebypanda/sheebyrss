@@ -39,8 +39,6 @@ class ParseRss < ServiceBase
                )
             end
         end
-      else
-        flash[:alert] = "Error : #{source.url} can not be loaded"
       end
     end
   end
