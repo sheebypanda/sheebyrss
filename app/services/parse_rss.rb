@@ -17,26 +17,28 @@ class ParseRss < ServiceBase
   def get_rss
     @sources = @current_user.sources.all
     @sources.each do |source|
-      source.articles.destroy_all
       rss = RSS::Parser.parse(source.url, false)
       if rss
         case rss.feed_type
           when 'rss'
             rss.items.each do |item|
-              source.articles.create(
-                title: item.title,
-                url:item.link,
-                excerpt: Sanitize.fragment(item.description),
-                pub_date: item.pubDate)
+              unless source.articles.find_by(url: item.link)
+                source.articles.create(
+                  title: item.title,
+                  url:item.link,
+                  excerpt: Sanitize.fragment(item.description.split.slice(0, 150).join(" ")),
+                  pub_date: item.pubDate)
+              end
             end
           when 'atom'
             rss.items.each do |item|
-              source.articles.create(
-              title: item.title.content,
-              url: item.url.content,
-              excerpt: Sanitize.fragment(item.description.content),
-              pub_date: item.pubDate.content
-               )
+              unless item.url == source.articles.find_by(url: item.url.content)
+                source.articles.create(
+                  title: item.title.content,
+                  url: item.url.content,
+                  excerpt: Sanitize.fragment(item.description.content.split.slice(0, 150).join(" ")),
+                  pub_date: item.pubDate.content )
+              end
             end
         end
       end
