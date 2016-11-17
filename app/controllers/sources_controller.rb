@@ -7,7 +7,7 @@ class SourcesController < ApplicationController
   def new
     @source = current_user.sources.new
   end
-    
+
   def update
     ParseRss.run(current_user)
     redirect_to sources_path
