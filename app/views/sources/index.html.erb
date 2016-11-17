@@ -16,13 +16,13 @@
           <p class="card-text"><%= article.excerpt %></p>
           <% now = DateTime.now
              pubdate = DateTime.parse(article.pub_date.to_s)
-             time = (now - pubdate).to_i
+             time = (now - pubdate).to_f * 24
              if time == 0
-               day = " Today"
-             elsif time == 1
+               day = "Just now"
+             elsif time < 24
+               day = time.round.to_s + " hours"
+             else  time > 24
                day = " Yesterday"
-             else
-               day = time.to_s + " days"
              end
           %>
           <p class="card-text float-xs-left"><small class="text-muted"><%= day %></small></p>
