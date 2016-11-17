@@ -35,8 +35,24 @@
     <% end %>
   </div>
 
-  <div class="container mt-2 card card-block card-primary">
-    
+  <div class="container mt-2 card ">
+    <div class="card-block">
+      <h4 class="card-title">Sources feed</h4>
+      <p class="card-text">List of your ressources feed with the number of articles associated.</p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <% current_user.sources.all.each do |source| %>
+        <li class="list-group-item">
+          <%= source.name %>
+          <span class="tag tag-pill tag-default"><%= source.articles.count %></span>
+          <%= link_to icon('close', class: "text-danger") , source ,
+            method: :delete,
+            data: { confirm: "Are you sure to delete this source ?" } %>
+</li>
+      <% end %>
+    </ul>
+
+
   </div>
 
   <%= button_to "Delete my account", registration_path(resource_name),
