@@ -6,11 +6,8 @@
     <a class="navbar-brand" href="/">Sheeby RSS</a>
     <ul class="nav navbar-nav">
       <% if user_signed_in? %>
-      <div class="float-xs-left form-inline">
-          <%= simple_form_for @source do |f| %>
-            <%= f.input :url , label: false, placeholder: "http://url.com/feed" %>
-            <%= f.button :button, icon('plus') + " Add new feed", class: "btn-outline-info" %>
-          <% end %>
+      <div class="float-xs-left">
+        <%= link_to icon("plus")+" Add new content"  , new_source_path, :class => 'btn-outline-info btn'  %>
       </div>
       <% end %>
     </ul>

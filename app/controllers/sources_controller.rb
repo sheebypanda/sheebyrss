@@ -2,9 +2,12 @@ class SourcesController < ApplicationController
 
   def index
     @articles = current_user.articles.order(pub_date: :DESC).limit(50)
-    @source = current_user.sources.new
   end
 
+  def new
+    @source = current_user.sources.new
+  end
+    
   def update
     ParseRss.run(current_user)
     redirect_to sources_path
@@ -47,7 +50,7 @@ class SourcesController < ApplicationController
   def get_source
     @source = current_user.sources.find(params[:id])
   end
-  
+
   def get_source_name(url)
     url.slice!("http://")
     url.slice!("/feed/")
