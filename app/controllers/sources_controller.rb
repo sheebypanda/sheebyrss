@@ -53,6 +53,7 @@ class SourcesController < ApplicationController
 
   def get_source_name(url)
     url.slice!("http://")
+    url.slice!("https://")
     url.slice!("/feed/")
     url.slice!("/feed")
     url.slice!("www.")
