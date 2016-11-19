@@ -25,7 +25,7 @@ class ParseRss < ServiceBase
                 source.articles.create(
                   title: item.title,
                   url:item.link,
-                  excerpt: Sanitize.fragment(item.description.split.slice(0, 150).join(" ")),
+                  excerpt: Sanitize.fragment(item.description.split.slice(0, 100).join(" ")),
                   pub_date: item.pubDate)
               end
             end
@@ -35,7 +35,7 @@ class ParseRss < ServiceBase
                 source.articles.create(
                   title: item.title.content,
                   url: item.url.content,
-                  excerpt: Sanitize.fragment(item.description.content.split.slice(0, 150).join(" ")),
+                  excerpt: Sanitize.fragment(item.description.content.split.slice(0, 100).join(" ")),
                   pub_date: item.pubDate.content )
               end
             end
