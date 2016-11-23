@@ -1,7 +1,7 @@
 class SourcesController < ApplicationController
 
   def index
-    @articles = current_user.articles.order(pub_date: :DESC).page(params[:page]).per(9)
+    @articles = current_user.articles.order(pub_date: :DESC).page(params[:page]).per(12)
   end
 
   def new
