@@ -10,6 +10,6 @@ I can't stand informing myself by social networks. They choose for you what you 
 
 ## TODO
 
- * admin page with user list
- * Limit articles by sources
  * Scroll down auto load next page
+ * add delete user power for admin
+ * Limit articles by sources
