@@ -32,3 +32,9 @@
 
   <% end %>
 </div>
+
+<% unless @articles.current_page == @articles.total_pages %>
+  <p id="view-more">
+    <%= link_to('View More', url_for(page: @articles.current_page + 1)) %>
+  </p>
+<% end %>

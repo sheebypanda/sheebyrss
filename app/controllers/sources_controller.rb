@@ -1,7 +1,7 @@
 class SourcesController < ApplicationController
 
   def index
-    @articles = current_user.articles.order(pub_date: :DESC).limit(50)
+    @articles = current_user.articles.order(pub_date: :DESC).page(params[:page]).per(9)
   end
 
   def new
@@ -17,6 +17,8 @@ class SourcesController < ApplicationController
     @source = current_user.sources.new(source_url)
     if current_user.sources.find_by(source_url)
       flash[:alert] = "Error :  #{@source.url} already added"
+    elsif current_user.sources.count > 24
+      flash[:alert] = "Error :  You have reached the fair use of 25 RSS feeds"
     else
       begin
         RSS::Parser.parse(@source.url, do_validate=true, ignore_unknown_element=true)

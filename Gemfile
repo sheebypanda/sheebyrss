@@ -17,7 +17,7 @@ gem 'font-awesome-sass', '~> 4.7.0'
 gem 'simple_form'
 gem 'devise'
 gem 'sanitize'
-gem 'will_paginate', '~> 3.1.1'
+gem 'kaminari'
 
 
 source 'https://rails-assets.org' do
