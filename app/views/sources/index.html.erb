@@ -21,7 +21,7 @@
                day = "Just now"
              elsif time < 24
                day = time.round.to_s + " hours"
-             else  time > 24
+             else  time >= 24
                day = " Yesterday"
              end
           %>
