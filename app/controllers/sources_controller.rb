@@ -59,6 +59,7 @@ class SourcesController < ApplicationController
     url.slice!("/feed/")
     url.slice!("/feed")
     url.slice!("www.")
+    url.slice!("www2.")
   end
 
 end
