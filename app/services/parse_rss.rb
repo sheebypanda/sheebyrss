@@ -22,20 +22,30 @@ class ParseRss < ServiceBase
           when 'rss'
             rss.items.each do |item|
               unless source.articles.find_by(url: item.link)
+                if item.description
+                  descr = Sanitize.fragment(item.description.split.slice(0, 100).join(" "))
+                else
+                  descr = nil
+                end
                 source.articles.create(
                   title: item.title,
                   url:item.link,
-                  excerpt: Sanitize.fragment(item.description.split.slice(0, 100).join(" ")),
+                  excerpt: descr,
                   pub_date: item.pubDate)
               end
             end
           when 'atom'
             rss.items.each do |item|
               unless item.url == source.articles.find_by(url: item.url.content)
+                if item.description.content
+                  descr = Sanitize.fragment(item.description.content.split.slice(0, 100).join(" "))
+                else
+                  descr = nil
+                end
                 source.articles.create(
                   title: item.title.content,
                   url: item.url.content,
-                  excerpt: Sanitize.fragment(item.description.content.split.slice(0, 100).join(" ")),
+                  excerpt: descr,
                   pub_date: item.pubDate.content )
               end
             end
