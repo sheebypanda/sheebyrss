@@ -21,15 +21,15 @@ class SourcesController < ApplicationController
     elsif current_user.sources.count > 24
       flash[:alert] = "Error :  You have reached the fair use of 25 RSS feeds"
     else
-      begin
-        RSS::Parser.parse(@source.url, do_validate=true, ignore_unknown_element=true)
+      #begin
+        # RSS::Parser.parse(@source.url, do_validate=true, ignore_unknown_element=true)
         @source.name = @source.url
         get_source_name(@source.name)
         @source.save
         flash[:notice] = @source.name + " added"
-      rescue
-        flash[:alert] = "Error : #{@source.url} is not a valid RSS feed"
-      end
+      #rescue
+        #flash[:alert] = "Error : #{@source.url} is not a valid RSS feed"
+      #end
     end
     update
   end
