@@ -61,6 +61,12 @@ class SourcesController < ApplicationController
     url.slice!("/feed")
     url.slice!("www.")
     url.slice!("www2.")
+    url.slice!("page=")
+    url.slice!("backend")
+    url.slice!("spip")
+    url.slice!(".php")
+    url.slice!("/")
+    url.slice!("?")
   end
 
   def get_source_timer(article)
@@ -74,7 +80,6 @@ class SourcesController < ApplicationController
     else  time >= 24
       day = " Yesterday"
     end
-    day
   end
 
 
