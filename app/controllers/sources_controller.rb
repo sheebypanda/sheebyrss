@@ -1,4 +1,5 @@
 class SourcesController < ApplicationController
+  helper_method :get_source_timer
 
   def index
     @articles = current_user.articles.order(pub_date: :DESC).page(params[:page]).per(12)
@@ -61,5 +62,20 @@ class SourcesController < ApplicationController
     url.slice!("www.")
     url.slice!("www2.")
   end
+
+  def get_source_timer(article)
+    now = DateTime.now
+    pubdate = DateTime.parse(article.pub_date.to_s)
+    time = (now - pubdate).to_f * 24
+    if time == 0
+      day = "Just now"
+    elsif time < 24
+      day = time.round.to_s + " hours"
+    else  time >= 24
+      day = " Yesterday"
+    end
+    day
+  end
+
 
 end
