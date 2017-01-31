@@ -1,4 +1,4 @@
-require 'rss'
+require 'rss/dublincore'
 class ParseRss < ServiceBase
 
   attr_accessor :current_user
@@ -29,6 +29,8 @@ class ParseRss < ServiceBase
                 end
                 if item.pubDate
                   date = item.pubDate
+                elsif item.dc_date
+                  date = item.dc_date
                 else
                   date = DateTime.now
                 end
