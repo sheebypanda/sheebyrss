@@ -34,15 +34,15 @@ class ParseRss < ServiceBase
                 else
                   date = DateTime.now
                 end
-                #begin
+                begin
                   source.articles.create(
                     title: item.title,
                     url:item.link,
                     excerpt: descr,
                     pub_date: date)
-                #rescue
-                #  flash[:alert] = "Error : #{@source.url} is not a valid RSS feed"
-                #end
+                rescue
+                  flash[:alert] = "Error : #{@source.url} is not a valid RSS feed"
+                end
               end
             end
           when 'atom'
