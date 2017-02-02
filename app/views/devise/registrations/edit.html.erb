@@ -42,12 +42,12 @@
     </div>
     <ul class="list-group list-group-flush">
       <% current_user.sources.all.each do |source| %>
-        <li class="list-group-item">
+        <li class="list-group-item d-flex justify-content-between">
           <%= source.name %>
-          <span class="tag tag-pill tag-default"><%= source.articles.count %></span>
-          <%= link_to icon('close', class: "text-danger") , source ,
+          <span class="badge badge-pill badge-default"><%= source.articles.count %> articles</span>
+          <%= link_to icon('close') , source ,
             method: :delete,
-            data: { confirm: "Are you sure to delete this source ?" } %>
+            data: { confirm: "Are you sure to delete this source ?" }, class: "btn btn-outline-danger" %>
         </li>
       <% end %>
     </ul>

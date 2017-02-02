@@ -24,14 +24,14 @@ class SourcesController < ApplicationController
     elsif current_user.sources.count > 24
       flash[:alert] = "Error :  You have reached the fair use of 25 RSS feeds"
     else
-      begin
+      #begin
         clear_url(@source.url)
         rss = ParseRss.new(current_user).get_rss(@source)
         @source.name = @source.url
         get_source_name(@source.name)
-      rescue
-        flash[:alert] = "Network error : #{source_url[:url]} count not be reached"
-      end
+      #rescue
+        #flash[:alert] = "Network error : #{source_url[:url]} count not be reached"
+      #end
       if rss
         @source.save
         flash[:notice] = "#{@source.name} added"

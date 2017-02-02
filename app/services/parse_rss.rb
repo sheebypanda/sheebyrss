@@ -9,9 +9,9 @@ class ParseRss < ApplicationController
 
   def get_rss(source_url)
     begin
-      rss = RSS::Parser.parse('http://' + source_url.url)
+      rss = RSS::Parser.parse('https://' + source_url.url, false)
     rescue
-      rss = RSS::Parser.parse('https://' + source_url.url)
+      rss = RSS::Parser.parse('http://' + source_url.url, false)
     end
   end
 
