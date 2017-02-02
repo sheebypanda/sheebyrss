@@ -9,9 +9,9 @@ class ParseRss < ApplicationController
 
   def get_rss(source_url)
     begin
-      rss = RSS::Parser.parse(source_url.url, false)
+      rss = RSS::Parser.parse('http://' + source_url.url)
     rescue
-      flash[:alert] = "Network error : #{source_url.url} count not be reached"
+      rss = RSS::Parser.parse('https://' + source_url.url)
     end
   end
 

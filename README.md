@@ -12,4 +12,4 @@ I can't stand informing myself by social networks. They choose for you what you 
 
  * Scroll down auto load next page
  * add delete user power for admin
- * Limit articles by sources
+ * solve HTTP redirection problem

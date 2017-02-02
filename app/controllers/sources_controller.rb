@@ -24,20 +24,25 @@ class SourcesController < ApplicationController
     elsif current_user.sources.count > 24
       flash[:alert] = "Error :  You have reached the fair use of 25 RSS feeds"
     else
-      #begin
+      begin
+        clear_url(@source.url)
         rss = ParseRss.new(current_user).get_rss(@source)
         @source.name = @source.url
         get_source_name(@source.name)
+      rescue
+        flash[:alert] = "Network error : #{source_url[:url]} count not be reached"
+      end
+      if rss
         @source.save
-        clear_articles(@source)
-        ParseRss.new(current_user).get_articles(@source)
-        flash[:notice] = @source.name + " added"
-      #rescue
-      #  flash[:alert] = "Error when trying to save articles from  #{source_url[:url]}"
-      #end
+        flash[:notice] = "#{@source.name} added"
+        begin
+          ParseRss.new(current_user).get_articles(@source)
+        rescue
+          flash[:alert] = "Error when trying to save articles from  #{source_url[:url]}"
+        end
+      end
     end
     redirect_to sources_path
-    #update
   end
 
   def destroy
@@ -65,19 +70,22 @@ class SourcesController < ApplicationController
   end
 
   def get_source_name(url)
-    url.slice!("http:")
-    url.slice!("https:")
-    url.slice!("feed")
+    url.slice!("/feed/")
+    url.slice!("/feed")
+    url.slice!("feed/")
     url.slice!("www.")
     url.slice!("www2.")
     url.slice!("page=")
     url.slice!("backend")
     url.slice!("spip")
     url.slice!(".php")
-    url.slice!('/')
-    url.slice!("//")
     url.slice!("?")
     url.slice!("=")
+  end
+
+  def clear_url(url)
+    url.slice!("http://")
+    url.slice!("https://")
   end
 
   def get_source_timer(article)

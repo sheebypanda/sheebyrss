@@ -19,6 +19,7 @@ gem 'devise'
 gem 'sanitize'
 gem 'kaminari'
 
+gem 'open_uri_redirections'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-tether', '>= 1.1.0'
@@ -26,10 +27,10 @@ end
 
 group :development, :test do
   gem 'byebug'
+  gem 'better_errors'
 end
 
 group :development do
   gem 'web-console', '~> 2.0'
-
   gem 'spring'
 end
