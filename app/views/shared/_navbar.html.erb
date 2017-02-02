@@ -1,37 +1,28 @@
-<nav class="navbar navbar-dark bg-inverse navbar-full mb-1">
-  <button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar2" aria-controls="exCollapsingNavbar2" aria-expanded="false" aria-label="Toggle navigation">
-    &#9776;
+<nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse sticky-top">
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-toggleable-xs" id="exCollapsingNavbar2">
-    <a class="navbar-brand" href="/">Sheeby RSS</a>
-    <ul class="nav navbar-nav">
+  <a class="navbar-brand" href="/">Sheeby RSS</a>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
       <% if user_signed_in? %>
-      <div class="float-xs-left">
-
-        <!-- Button trigger modal -->
-        <!-- <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-          Launch demo modal
-        </button> -->
-
-
-
-
-
-
-        <%= link_to icon("plus")+" Add new content"  , new_source_path, :class => 'btn-outline-info btn'  %>
-      </div>
+        <li class="nav-item mr-2 mb-1">
+          <%= link_to icon("")+"Add "+icon("rss")  , new_source_path, :class => 'btn-outline-info btn'  %>
+        </li>
+        <li class="nav-item">
+          <%= link_to icon("refresh")+" Update"  , "/update", :class => 'btn-outline-success btn'  %>
+        </li>
       <% end %>
     </ul>
-    <ul class="float-lg-right nav navbar-nav">
+
+    <ul class="navbar-nav my-2 my-lg-0">
       <% if user_signed_in? %>
-        <li class="nav-item">
-          <%= link_to icon("refresh")+" Update"  , "/update", :class => 'btn-outline-warning btn'  %>
+        <li class="nav-item  mr-2 mb-1">
+          <%= link_to icon("user-circle-o") + " " + current_user.email , edit_user_registration_path, :class => 'btn-outline-secondary btn' %>
         </li>
         <li class="nav-item">
-          <%= link_to current_user.email , edit_user_registration_path, :class => 'nav-link active' %>
-        </li>
-        <li class="nav-item">
-          <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'nav-link'  %>
+          <%= link_to icon("sign-out") + "Logout", destroy_user_session_path, method: :delete, :class => 'btn-outline-danger btn'  %>
         </li>
       <% else %>
       <li class="nav-item">
@@ -44,24 +35,3 @@
     </ul>
   </div>
 </nav>
-
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
