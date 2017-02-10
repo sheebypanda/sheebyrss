@@ -9,7 +9,6 @@ Like Google Now cards.
 I can't stand informing myself by social networks. They choose for you what you need to know. And I hate sponsored content like online RSS readers do.
 
 ## TODO
-
+ * Fixing update latency making the app anavailable on heroku free hosting
  * Scroll down auto load next page
- * add delete user power for admin
- * solve HTTP redirection problem
+ * Possibility for admin to delete user
