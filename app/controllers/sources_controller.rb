@@ -66,7 +66,7 @@ class SourcesController < ApplicationController
   end
 
   def clear_articles(source_id)
-    source_id.articles.destroy
+    source_id.articles.destroy_all
   end
 
   def get_source_name(url)
